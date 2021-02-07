@@ -11,11 +11,12 @@
     display:flex;
     flex-direction: row;
     justify-content: center;
+    flex-wrap: wrap;
   }
 
   .radio-button {
       display:flex;
-      margin: 2px;
+      margin: 1px;
       justify-content: center;
       width:30px;
       border: 2px solid #dbd8cf;
@@ -38,4 +39,11 @@
     font-weight: bold;
     color:#115293;
     box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.2);
+  }
+
+  .actions-buttons{
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;
   }

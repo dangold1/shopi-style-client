@@ -89,3 +89,38 @@
 *::after {
   box-sizing: border-box;
 }
+
+@media only screen and (max-width: 600px) {
+  label {
+    display: block;
+    padding-bottom: 1px;
+  }
+  
+  .react-autosuggest__input {
+    margin-left:0;
+    width: 300px;
+    padding: 5px 10px;
+    font-family: Helvetica, sans-serif;
+    font-size: 14px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+  }
+  
+  .react-autosuggest__suggestions-container--open {
+    margin-left:0;
+    top: 27px;
+    width: 300px;
+    border: 0.5px solid #aaa;
+    background-color: #fff;
+    font-size: 14px;
+    overflow-y: auto;
+    z-index: 2; 
+  }
+
+
+  .image {
+    width:60px;
+    height: 60px;
+    margin-right: 20px;
+  }
+}

@@ -24,7 +24,7 @@ import axios from 'axios';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-
+import useCheckMobileScreen from '../../hooks/useCheckMobileScreen';
 
 const stripePromise = loadStripe(STRIPE_PUBLISH_KEY);
 
@@ -61,6 +61,9 @@ const useStyles = makeStyles((theme) => ({
     form: {
         width: '700px',
         margin: '0 auto',
+        [theme.breakpoints.down('sm')]:{
+            width: '320px',
+        },
     },
     paymentCard: {
         margin: '20px',
@@ -94,6 +97,7 @@ const DialogTitle = withStyles(styles)((props) => {
         </MuiDialogTitle>
     );
 });
+
 const PaymentPage = props => {
     const classes = useStyles();
     const { product: initProduct, isLoading: productLoading } = useSelector(state => state.product);
@@ -105,12 +109,13 @@ const PaymentPage = props => {
         product.newPrice = product.amount * product.price;
         setProduct(cloneDeep(product));
     }
-
+    const isMobileMode = useCheckMobileScreen();
+    
     return (
         <Container >
             {
                 productLoading || listLoading ? <LoadingComponent />
-                    : product && paymentPage === "product-page" &&
+                    : product && paymentPage === "product-page" && !isMobileMode &&
                     (
                         <TableContainer elevation={3} className={classes.tableContainer} component={Paper}>
                             <Table className={classes.table} aria-label="simple table">
@@ -210,9 +215,7 @@ const CheckoutForm = ({ items }) => {
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
                             <Grid container spacing={2}>
-                                <Grid item xs={12}>
-                                    <Typography >Total Charges: {totalPrice}$</Typography>
-                                </Grid>
+                                <Grid item xs={12}><Typography >Total Charges: {totalPrice}$</Typography></Grid>
                                 <Grid item xs={12}>
                                     <TextField
                                         fullWidth

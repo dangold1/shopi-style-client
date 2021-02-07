@@ -35,6 +35,11 @@ const useStyles = makeStyles((theme) => ({
         width: '80%',
         padding: 20,
         textAlign: 'center',
+        [theme.breakpoints.down('sm')]: {
+            width: '95%',
+            padding: 0,
+            top: '230px',
+        },
     },
     link: {
         textDecoration: 'none !important',
@@ -79,7 +84,7 @@ const HomePage = props => {
                         {
                             Object.keys(categories).map(category =>
                                 categories[category].map((subCategory, i) =>
-                                    <Grid item xs={4} >
+                                    <Grid item md={4} xs={12} >
                                         <Card className={classes.card}>
                                             <Link to={`/${subCategory}`} key={i} className={classes.link}>
                                                 <CardHeader

@@ -8,7 +8,7 @@ import {
     increaseProductAmountAction,
     selectPaymentPageAction
 } from '../../store/actions/shoppingListActions';
-import { Box, Button, Typography, Card, CardContent, CardMedia } from '@material-ui/core';
+import { Button, Typography, Card, CardContent, CardMedia } from '@material-ui/core';
 import { capitalized, capitalFirstLetter } from '../../services/dataTypes.service';
 import { cloneDeep } from 'lodash';
 import { isProductExists } from '../../services/shoppingList.service';
@@ -24,24 +24,45 @@ import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        margin: 30,
-        height: 500,
+        marginTop: 30,
+        height: "500",
         boxShadow: '0px 0px 2px 2px rgba(0,0,0,0.2)',
+        [theme.breakpoints.down('sm')]: {
+            height: 500,
+        },
     },
     cardContainer: {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-around',
-        marginTop: 50,
+        paddingTop:'40px',
+        paddingBottom:'40px',
+        [theme.breakpoints.down('sm')]: {
+            paddingTop:20,
+            flexDirection: 'column',
+            alignItems: 'center',
+            marginTop: 0,
+        },
     },
     media: {
-        border: '2px solid #ccc',
-        borderRadius: '25px',
         height: 400,
         width: 400,
+        [theme.breakpoints.down('sm')]: {
+            margin: 20,
+            border: 0,
+            borderRadius: 0,
+            height: 150,
+            width: 150,
+        },
     },
     title: {
         fontFamily: 'Acme, sans-serif',
+        [theme.breakpoints.down('sm')]: {
+            marginTop:10,
+            marginBottom:10,
+            fontSize: 17,
+            flexWrap: 'wrap',
+        }
     },
     details: {
         display: 'flex',
@@ -49,9 +70,22 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         border: '1px solid #ccc',
         borderRadius: '25px',
+        width:'500px',
+        [theme.breakpoints.down('sm')]: {
+            border: 0,
+            borderRadius: 0,
+            marginTop: '40px',
+            height: 150,
+            width: '100%',
+        },
     },
     button: {
-        width: '200px',
+        margin: 5,
+        width: '230px',
+        [theme.breakpoints.down('sm')]: {
+            marin: '0 auto',
+            width: '230px',
+        },
     },
     popover: {
         width: '200px',
@@ -87,7 +121,7 @@ const ProductPage = (props) => {
         setProduct(newProduct);
     }
 
-    const onAddToCartClick = event => { 
+    const onAddToCartClick = event => {
         if (!validateSize(product)) {
             setErrorPopover(event.currentTarget);
             return;
@@ -122,7 +156,7 @@ const ProductPage = (props) => {
         dispatch(increaseProductAmountAction(productIndex));
     }
 
-    const validateSize = (product) => !(!product.selectedSize && product.sizes.length > 1)
+    const validateSize = (product) => !(!product.selectedSize && product.sizes.length > 1);
 
     let history = useHistory();
 
@@ -167,34 +201,20 @@ const ProductPage = (props) => {
                                     <Typography gutterBottom align="center" variant="subtitle1">
                                         {capitalFirstLetter(`${product.price}$`)}
                                     </Typography >
-                                    <Box
-                                        m={1}
-                                        display="flex"
-                                        justifyContent="center"
-                                    >
-                                        <form>
-                                            <Button
-                                                className={classes.button}
-                                                id="buy-now"
-                                                fullWidth
-                                                variant="contained"
-                                                color="primary"
-                                                startIcon={<ShoppingCartIcon />}
-                                                onClick={event => onBuyNowClick(event, history)}
-                                            >
-                                                Buy Now
+                                    <div className="actions-buttons">
+                                        <Button
+                                            className={classes.button}
+                                            id="buy-now"
+                                            variant="contained"
+                                            color="primary"
+                                            startIcon={<ShoppingCartIcon />}
+                                            onClick={event => onBuyNowClick(event, history)}
+                                        >
+                                            Buy Now
                                         </Button >
-                                        </form>
-                                    </Box>
-                                    <Box
-                                        m={1}
-                                        display="flex"
-                                        justifyContent="center"
-                                    >
                                         <Button
                                             className={classes.button}
                                             id='add-to-cart'
-                                            fullWidth
                                             variant="contained"
                                             color="secondary"
                                             startIcon={<FavoriteBorder />}
@@ -202,7 +222,7 @@ const ProductPage = (props) => {
                                         >
                                             Add to cart
                                         </Button>
-                                    </Box>
+                                    </div>
                                 </CardContent>
                             </Fragment>
                     }

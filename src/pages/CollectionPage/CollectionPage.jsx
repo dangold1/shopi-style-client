@@ -47,7 +47,7 @@ const CollectionPage = ({ subCategory }) => {
             {
                 isLoading ? <LoadingComponent />
                     : collection.products ?
-                        <Grid container spacing={2}>
+                        <Grid container spacing={1}>
                             {
                                 collection.products.map(product =>
                                     <Grid key={product._id} item xs={12} sm={3}>

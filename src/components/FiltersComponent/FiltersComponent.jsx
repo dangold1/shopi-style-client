@@ -12,6 +12,12 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
         minWidth: 200,
         maxWidth: 200,
+        [theme.breakpoints.down('sm')]: {
+            minWidth: '90%',
+            maxWidth: '90%',
+            marginLeft: 15,
+            marginRight: 15
+        },
     },
 }));
 

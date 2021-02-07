@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
+import useCheckMobileScreen from '../../hooks/useCheckMobileScreen';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, IconButton, Badge, MenuItem, Menu, TextField, Tooltip } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Badge, MenuItem, Menu, Tooltip } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
@@ -20,8 +20,12 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     backgroundColor: '#212121'
   },
-  link: {
+  appBarLink: {
     color: 'white',
+    textDecoration: 'none',
+  },
+  menuLink: {
+    color: 'black',
     textDecoration: 'none',
   },
   title: {
@@ -94,7 +98,7 @@ const useStyles = makeStyles((theme) => ({
   },
   sectionMobile: {
     display: 'flex',
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('sm')]: {
       display: 'none',
     },
   },
@@ -105,70 +109,94 @@ const useStyles = makeStyles((theme) => ({
 const AppBarComponent = props => {
   const classes = useStyles();
   const { shoppingList } = useSelector(state => state.shoppingList);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
-  // const [anchorEl, setAnchorEl] = useState(null);
-  // const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  // const isMenuOpen = Boolean(anchorEl);
-  // const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const onMobileMenuOpen = (event) => { setMobileMoreAnchorEl(event.currentTarget); };
 
-  // const onMobileMenuOpen = (event) => { setMobileMoreAnchorEl(event.currentTarget); };
+  const onMobileMenuClose = () => { setMobileMoreAnchorEl(null); };
 
-  // const onMenuClose = () => {
-  //   setAnchorEl(null);
-  //   onMobileMenuClose();
-  // };
+  const isMobileMode = useCheckMobileScreen();
 
-  // const onMobileMenuClose = () => { setMobileMoreAnchorEl(null); };
-  // const onProfileMenuOpen = (event) => { setAnchorEl(event.currentTarget); };
+  // ---------------------------------- renderMobileMenu ----------------------------------
+  const mobileMenuId = 'menu-mobile';
+
+  const renderMobileMenu = (
+    <Menu
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      id={mobileMenuId}
+      keepMounted
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={isMobileMenuOpen}
+      onClose={onMobileMenuClose}
+    >
+      <MenuItem onClick={onMobileMenuClose}>
+        <Link to="/" className={classes.menuLink}>
+          <IconButton aria-label="home" color="inherit">
+            <Badge color="secondary">
+              <HomeIcon />
+            </Badge>
+          </IconButton>
+          Home
+        </Link>
+      </MenuItem>
+      <MenuItem onClick={onMobileMenuClose}>
+        <Link to="/shopping-list" className={classes.menuLink}>
+          <IconButton aria-label="cart-notifications" color="inherit">
+            {!shoppingList.length && <AddShoppingCartIcon />}
+            {
+              shoppingList.length > 0 &&
+              <Badge badgeContent={getProductsAmount(shoppingList)} color="secondary">
+                <ShoppingCartIcon />
+              </Badge>
+            }
+          </IconButton>
+          Cart
+        </Link>
+      </MenuItem>
+    </Menu>
+  );
 
   // ---------------------------------- Render AppBarComponent ----------------------------------
   return (
     <div className={classes.grow}>
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
-          <Link to="/">
-            <img className={classes.appBarLogo} src={`${process.env.PUBLIC_URL}/assets/logos/logo-smaller.png`} />
-          </Link>
+          {
+            !isMobileMode &&
+            <Link to="/">
+              <img className={classes.appBarLogo} src={`${process.env.PUBLIC_URL}/assets/logos/logo-smaller.png`} />
+            </Link>
+          }
           <AutoCompleteComponent />
-        <div className={classes.grow} />
-        <div className={classes.sectionDesktop}>
-          <Link to="/" className={classes.link}>
-            <Tooltip title="Home">
-              <IconButton aria-label="home" color="inherit">
-                <Badge color="secondary">
-                  <HomeIcon />
-                </Badge>
-              </IconButton>
-            </Tooltip>
-          </Link>
-          <Link to="/shopping-list" className={classes.link}>
-            <Tooltip title="Cart">
-              <IconButton aria-label="cart-notifications" color="inherit">
-                {!shoppingList.length && <AddShoppingCartIcon />}
-                {
-                  shoppingList.length &&
-                  <Badge badgeContent={getProductsAmount(shoppingList)} color="secondary">
-                    <ShoppingCartIcon />
+          <div className={classes.grow} />
+          <div className={classes.sectionDesktop}>
+            <Link to="/" className={classes.appBarLink}>
+              <Tooltip title="Home">
+                <IconButton aria-label="home" color="inherit">
+                  <Badge color="secondary">
+                    <HomeIcon />
                   </Badge>
-                }
-              </IconButton>
-            </Tooltip>
-          </Link>
-          {/* <Tooltip title="Account">
-              <IconButton
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={onProfileMenuOpen}
-                color="inherit"
-              >
-                <AccountCircleIcon />
-              </IconButton>
-            </Tooltip> */}
-        </div>
-        {/* <div className={classes.sectionMobile}>
+                </IconButton>
+              </Tooltip>
+            </Link>
+            <Link to="/shopping-list" className={classes.appBarLink}>
+              <Tooltip title="Cart">
+                <IconButton aria-label="cart-notifications" color="inherit">
+                  {!shoppingList.length && <AddShoppingCartIcon />}
+                  {
+                    shoppingList.length > 0 &&
+                    <Badge badgeContent={getProductsAmount(shoppingList)} color="secondary">
+                      <ShoppingCartIcon />
+                    </Badge>
+                  }
+                </IconButton>
+              </Tooltip>
+            </Link>
+          </div>
+          <div className={classes.sectionMobile}>
             <IconButton
               aria-label="show more"
               aria-controls={mobileMenuId}
@@ -178,80 +206,12 @@ const AppBarComponent = props => {
             >
               <MoreVertIcon />
             </IconButton>
-          </div> */}
+          </div>
         </Toolbar>
       </AppBar>
-      {/* { renderMobileMenu} */ }
-  {/* { renderMenu} */ }
+      { renderMobileMenu}
     </div >
   );
-
-
-  // const menuId = 'primary-search-account-menu';
-  // const mobileMenuId = 'primary-search-account-menu-mobile';
-
-  // ---------------------------------- renderMenu ----------------------------------
-
-  // const renderMenu = (
-  //   <Menu
-  //     anchorEl={anchorEl}
-  //     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-  //     id={menuId}
-  //     keepMounted
-  //     transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-  //     open={isMenuOpen}
-  //     onClose={onMenuClose}
-  //   >
-  //     <MenuItem onClick={onMenuClose}>Sign In</MenuItem>
-  //     <MenuItem onClick={onMenuClose}>Register</MenuItem>
-  //   </Menu>
-  // );
-
-
-  // ---------------------------------- renderMobileMenu ----------------------------------
-
-  // const renderMobileMenu = (
-  //   <Menu
-  //     anchorEl={mobileMoreAnchorEl}
-  //     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-  //     id={mobileMenuId}
-  //     keepMounted
-  //     transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-  //     open={isMobileMenuOpen}
-  //     onClose={onMobileMenuClose}
-  //   >
-  //     <MenuItem onClick={onMobileMenuClose}>
-  //       <IconButton aria-label="home" color="inherit">
-  //         <Badge color="secondary">
-  //           <HomeIcon />
-  //         </Badge>
-  //       </IconButton>
-  //       <p>Home</p>
-  //     </MenuItem>
-  //     <MenuItem onClick={onMobileMenuClose}>
-  //       <IconButton aria-label="cart-notifications" color="inherit">
-  // { !shoppingList.length && <AddShoppingCartIcon />}
-  //         {
-  //          shoppingList.length &&
-  //           <Badge badgeContent={shoppingList.length} color="secondary">
-  //             <ShoppingCartIcon />
-  //           </Badge>
-  //         }
-  //       </IconButton>
-  //     </MenuItem>
-  //     <MenuItem onClick={onProfileMenuOpen}>
-  //       <IconButton
-  //         aria-label="account of current user"
-  //         aria-controls="primary-search-account-menu"
-  //         aria-haspopup="true"
-  //         color="inherit"
-  //       >
-  //         <AccountCircleIcon />
-  //       </IconButton>
-  //       <p>Profile</p>
-  //     </MenuItem>
-  //   </Menu>
-  // );
 }
 
 

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { LoadingComponent, ErrorComponent } from '../../components/ExceptionComponents/ExceptionComponents';
 import { useSelector, useDispatch } from 'react-redux';
-
 import {
     decreaseProductAmountAction,
     deleteProductAction,
@@ -9,7 +8,6 @@ import {
     increaseProductAmountAction,
     selectPaymentPageAction,
 } from '../../store/actions/shoppingListActions';
-
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -20,7 +18,7 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
-import { CssBaseline, Grid, Tooltip } from '@material-ui/core';
+import { CssBaseline, Grid, Tooltip, Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -28,8 +26,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { useHistory } from "react-router-dom";
-
-
 import { capitalized } from '../../services/dataTypes.service';
 import './ShoppingListPage.css';
 
@@ -50,6 +46,14 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(3),
         padding: theme.spacing(3),
         boxShadow: '1px 1px 1px 1px rgba(0,0,0,0.2)',
+        width: 700,
+        [theme.breakpoints.down('sm')]: {
+            width: 350,
+            margin: theme.spacing(0),
+            marginTop: theme.spacing(3),
+            paddingRight: theme.spacing(1),
+            paddingLeft: theme.spacing(1),
+        }
     },
     link: {
         textDecoration: 'none !important'
@@ -64,10 +68,29 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(7),
         border: '1px solid #ccc',
         boxShadow: '1px 1px 1px 1px rgba(0,0,0,0.2)',
+        [theme.breakpoints.down('sm')]: {
+            marginRight: theme.spacing(2),
+            width: theme.spacing(10),
+            height: theme.spacing(10),
+        }
+    },
+    listItemPrimary: {
+        [theme.breakpoints.down('sm')]: {
+            fontSize: 13,
+        }
+    },
+    listItemSecondary: {
+        [theme.breakpoints.down('sm')]: {
+            fontSize: 12,
+        }
     },
     select: {
         marginLeft: 20,
         padding: 5,
+        [theme.breakpoints.down('sm')]: {
+            marginLeft: 30,
+            padding: 2,
+        }
     },
 }));
 
@@ -150,8 +173,16 @@ const ShoppingListPage = props => {
                                                     <Avatar src={product.imageUrl} className={classes.avatar} />
                                                 </ListItemAvatar>
                                                 <ListItemText
-                                                    primary={product.caption}
-                                                    secondary={`Price: ${product.price * product.amount}$`}
+                                                    primary={
+                                                        <Typography variant="body2" className={classes.listItemPrimary}>
+                                                            {product.caption}
+                                                        </Typography>
+                                                    }
+                                                    secondary={
+                                                        <span className={classes.listItemSecondary}>
+                                                            {`Price: ${product.price * product.amount}$`}
+                                                        </span>
+                                                    }
                                                 />
                                                 {
                                                     product.selectedSize &&
