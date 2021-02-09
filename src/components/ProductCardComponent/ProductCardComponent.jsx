@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
     },
     media: {
         height: 280,
+        backgroundSize: 'contain',
     },
     cardContent: {
         backgroundColor: '#424242',

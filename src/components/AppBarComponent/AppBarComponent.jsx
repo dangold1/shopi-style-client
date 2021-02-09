@@ -5,7 +5,7 @@ import useCheckMobileScreen from '../../hooks/useCheckMobileScreen';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, IconButton, Badge, MenuItem, Menu, Tooltip } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import MenuIcon from '@material-ui/icons/Menu';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import AutoCompleteComponent from '../AutoCompleteComponent/AutoCompleteComponent';
@@ -204,7 +204,7 @@ const AppBarComponent = props => {
               onClick={onMobileMenuOpen}
               color="inherit"
             >
-              <MoreVertIcon />
+              <MenuIcon />
             </IconButton>
           </div>
         </Toolbar>

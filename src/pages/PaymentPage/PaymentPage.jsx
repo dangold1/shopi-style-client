@@ -67,6 +67,12 @@ const useStyles = makeStyles((theme) => ({
     },
     paymentCard: {
         margin: '20px',
+        [theme.breakpoints.down('sm')]:{
+            margin: 0,
+            marginTop: '20px',
+            marginBottom: '20px',
+            width:'110%',
+        },
     }
 }));
 

@@ -21,24 +21,35 @@ const useStyles = makeStyles((theme) => ({
 
 const CategoriesBarComponent = props => {
     const classes = useStyles();
+    const [isOpenSubcategories, setIsOpenSubcategories] = useState(false);
     return (
         <div className={classes.root}>
             <AppBar position="static" className={classes.appBar}>
                 <Toolbar>
                     {
-
                         Object.keys(categories).map((category, index) =>
                             <div className="dropdown" key={index}>
-                                <li className="dropdown-li">{capitalFirstLetter(category)}</li>
-                                <div className="dropdown-content" key={index}>
-                                    {
-                                        categories[category].map((subCategory, i) =>
-                                            <Link to={`/${subCategory}`} key={i} >
-                                                {capitalFirstLetter(subCategory)}
-                                            </Link>
-                                        )
-                                    }
-                                </div>
+                                <li
+                                    className="dropdown-li"
+                                    onClick={() => setIsOpenSubcategories(true)}
+                                >
+                                    {capitalFirstLetter(category)}
+                                </li>
+                                {
+                                    isOpenSubcategories && <div className="dropdown-content" key={index}>
+                                        {
+                                            categories[category].map((subCategory, i) =>
+                                                <Link
+                                                    to={`/${subCategory}`}
+                                                    key={i}
+                                                    onClick={() => setIsOpenSubcategories(false)}
+                                                >
+                                                    {capitalFirstLetter(subCategory)}
+                                                </Link>
+                                            )
+                                        }
+                                    </div>
+                                }
                             </div>
                         )
                     }

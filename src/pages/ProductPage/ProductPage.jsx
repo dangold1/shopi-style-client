@@ -47,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
     media: {
         height: 400,
         width: 400,
+        backgroundSize: 'contain',  
         [theme.breakpoints.down('sm')]: {
             margin: 20,
             border: 0,
