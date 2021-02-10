@@ -12,7 +12,7 @@ import PaymentPage from '../pages/PaymentPage/PaymentPage';
 const PagesRouts = props => {
     return (
         <Fragment>
-            <Container maxWidth="lg">
+            <Container>
                 <Switch>
                     <Route path="/:collection/:productID" component={ProductPage} />
                     {

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import FiltersComponent from '../../components/FiltersComponent/FiltersComponent';
@@ -9,6 +9,12 @@ import { fetchCollectionAction } from '../../store/actions/collectionActions';
 
 
 const useStyles = makeStyles((theme) => ({
+    loading: {
+        marginTop: '50px',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
     root: {
         flexGrow: 1,
         display: 'flex',
@@ -35,18 +41,18 @@ const CollectionPage = ({ subCategory }) => {
         dispatch(fetchCollectionAction(subCategory, params));
     };
 
-    return (
-        <div className={classes.root}>
-            {
-                collection && collection.products &&
-                <FiltersComponent
-                    collection={collection}
-                    refetch={refetch}
-                />
-            }
-            {
-                isLoading ? <LoadingComponent />
-                    : collection.products ?
+    return isLoading ? <div className={classes.loading}><LoadingComponent /></div> :
+        (
+            <div className={classes.root}>
+                {
+                    collection?.products &&
+                    <FiltersComponent
+                        collection={collection}
+                        refetch={refetch}
+                    />
+                }
+                {
+                    collection?.products ?
                         <Grid container spacing={1}>
                             {
                                 collection.products.map(product =>
@@ -61,9 +67,9 @@ const CollectionPage = ({ subCategory }) => {
                             }
                         </Grid>
                         : <ErrorComponent message='products section error' />
-            }
-        </div >
-    );
+                }
+            </div>
+        );
 }
 
 export default CollectionPage;

@@ -4,13 +4,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { Alert, AlertTitle } from '@material-ui/lab';
 
 const useStyles = makeStyles((theme) => ({
-  loading: {
-    display: 'flex',
-    flexDirection: 'column',
-    '& > * + *': {
-      marginTop: theme.spacing(2),
-    }
-  },
   error: {
     width: '100%',
     '& > * + *': {
@@ -20,16 +13,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export const LoadingComponent = props => {
-  const classes = useStyles();
-  return (
-    <div className={classes.loading}>
-      <CircularProgress />
-      <strong>Loading...</strong>
-    </div>
-  );
-}
-
+export const LoadingComponent = () => <CircularProgress />
 
 export const ErrorComponent = ({ message }) => {
   const classes = useStyles();
