@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import FiltersComponent from '../../components/FiltersComponent/FiltersComponent';
@@ -41,18 +41,18 @@ const CollectionPage = ({ subCategory }) => {
         dispatch(fetchCollectionAction(subCategory, params));
     };
 
-    return isLoading ? <div className={classes.loading}><LoadingComponent /></div> :
-        (
-            <div className={classes.root}>
-                {
-                    collection?.products &&
+    return (
+        <div className={classes.root}>
+            {
+                collection && collection.products ?
                     <FiltersComponent
                         collection={collection}
                         refetch={refetch}
-                    />
-                }
-                {
-                    collection?.products ?
+                    /> : <ErrorComponent message='Filters section error' />
+            }
+            {
+                isLoading ? <div className={classes.loading}><LoadingComponent /></div> :
+                    collection && collection.products ?
                         <Grid container spacing={1}>
                             {
                                 collection.products.map(product =>
@@ -66,10 +66,10 @@ const CollectionPage = ({ subCategory }) => {
                                 )
                             }
                         </Grid>
-                        : <ErrorComponent message='products section error' />
-                }
-            </div>
-        );
+                        : <ErrorComponent message='Products section error' />
+            }
+        </div>
+    );
 }
 
 export default CollectionPage;
