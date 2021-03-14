@@ -1,1 +1,1 @@
-### Production: [Shopi-Style](https://shopi-style-client.herokuapp.com/).
+### Production: [Shopi-Style](https://shopi-style.netlify.app/).
