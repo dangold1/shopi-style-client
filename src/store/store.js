@@ -1,9 +1,9 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import { productReducer } from './reducers/productsReducer';
-import { collectionReducer } from './reducers/collectionReducer';
-import { shoppingListReducer } from './reducers/shoppingListReducer';
-import { searchReducer } from './reducers/searchReducer';
+import { productReducer } from './reducers/products';
+import { collectionReducer } from './reducers/collection';
+import { shoppingListReducer } from './reducers/shopping-list';
+import { searchReducer } from './reducers/search';
 import { STORE_KEY } from '../utils/keys';
 
 const saveToLocalStorage = (state) => {

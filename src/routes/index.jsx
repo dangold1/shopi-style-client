@@ -1,27 +1,16 @@
-import React, { lazy, Suspense } from "react";
+import React from "react";
 import { Switch, Route } from "react-router-dom";
-import { LoadingComponent } from "../components/ExceptionComponents/ExceptionComponents";
 import categories from "../utils/data";
-const Container = lazy(() => import("@material-ui/core/Container"));
-const ProductPage = lazy(() => import("../pages/ProductPage/ProductPage"));
-const CollectionPage = lazy(() =>
-  import("../pages/CollectionPage/CollectionPage")
-);
-const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
-const ShoppingListPage = lazy(() =>
-  import("../pages/ShoppingListPage/ShoppingListPage")
-);
-const PaymentPage = lazy(() => import("../pages/PaymentPage/PaymentPage"));
+import Container from "@material-ui/core/Container"
+import ProductPage from "../pages/ProductPage"
+import CollectionPage from "../pages/CollectionPage"
+import HomePage from "../pages/HomePage"
+import ShoppingListPage from "../pages/ShoppingListPage"
+import PaymentPage from "../pages/PaymentPage"
 
-const PagesRouts = (props) => {
+const PagesRouts = () => {
   return (
-    <Suspense
-      fallback={
-        <div style={{ textAlign: "center" }}>
-          <LoadingComponent />
-        </div>
-      }
-    >
+    <>
       <Container>
         <Switch>
           <Route path="/:collection/:productID" component={ProductPage} />
@@ -39,7 +28,7 @@ const PagesRouts = (props) => {
         <Route exact path="/payment-page" component={PaymentPage} />
         <Route exact path="/" component={HomePage} />
       </Switch>
-    </Suspense>
+    </>
   );
 };
 

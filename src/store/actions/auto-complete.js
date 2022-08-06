@@ -3,7 +3,7 @@ import {
     FETCH_MATCH_PRODUCTS_REQUEST,
     FETCH_MATCH_PRODUCTS_SUCCESS,
     FETCH_MATCH_PRODUCTS_FAIL,
-} from '../constats/autoCompleteConstants';
+} from '../constats/auto-complete';
 import axios from 'axios';
 
 export const searchAction = (text) => async (dispatch) => {

@@ -3,7 +3,7 @@ import {
     FETCH_PRODUCT_SUCCESS,
     FETCH_PRODUCT_FAIL,
     SET_SELECTED_PRODUCT,
-} from '../constats/productsConstants';
+} from '../constats/products';
 
 const initialState = { product: {}, isLoading: false, error: null };
 

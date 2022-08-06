@@ -1,16 +1,16 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { LoadingComponent } from "../../components/ExceptionComponents/ExceptionComponents";
+import { LoadingComponent } from "../../components/ExceptionComponents";
 import { useSelector, useDispatch } from "react-redux";
 import {
   fetchProductAction,
   updateSelectedProductAction,
-} from "../../store/actions/productsActions";
+} from "../../store/actions/products";
 import {
   addNewProductToCartAction,
   increaseProductAmountAction,
   selectPaymentPageAction,
-} from "../../store/actions/shoppingListActions";
+} from "../../store/actions/shopping-list";
 import {
   Button,
   Typography,
@@ -21,9 +21,9 @@ import {
 import {
   capitalized,
   capitalFirstLetter,
-} from "../../services/dataTypes.service";
+} from "../../services/data-types";
 import { cloneDeep } from "lodash";
-import { isProductExists } from "../../services/shoppingList.service";
+import { isProductExists } from "../../services/shopping-list";
 import { v4 as uuidv4 } from "uuid";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { useParams, useHistory } from "react-router-dom";

@@ -6,10 +6,10 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import { capitalFirstLetter } from '../../services/dataTypes.service';
+import { capitalFirstLetter } from '../../services/data-types';
 
 import { useDispatch } from 'react-redux';
-import { updateSelectedProductAction } from '../../store/actions/productsActions';
+import { updateSelectedProductAction } from '../../store/actions/products';
 
 const useStyles = makeStyles((theme) => ({
     card: {

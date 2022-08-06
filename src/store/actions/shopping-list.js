@@ -5,7 +5,7 @@ import {
     EDIT_PRODUCT_SIZE,
     DELETE_PRODUCT_FROM_CART,
     SELECT_PAGE,
-} from '../constats/shoppingListConstants';
+} from '../constats/shopping-list';
 
 export const addNewProductToCartAction = (newProduct) => async (dispatch) => {
     dispatch({ type: ADD_NEW_PRODUCT_TO_CART, payload: newProduct });

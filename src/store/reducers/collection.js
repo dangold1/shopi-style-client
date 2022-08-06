@@ -2,7 +2,7 @@ import {
     FETCH_COLLECTION_REQUEST,
     FETCH_COLLECTION_SUCCESS,
     FETCH_COLLECTION_FAIL,
-} from '../constats/collectionConstants';
+} from '../constats/collection';
 
 const initialState = { collection: {}, isLoading: false, error: null };
 

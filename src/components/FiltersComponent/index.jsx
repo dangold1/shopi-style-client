@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react'
 import './FiltersComponent.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Select from 'react-select';
-import { mapOptions } from '../../services/dataTypes.service';
+import { mapOptions } from '../../services/data-types';
 import { cloneDeep } from 'lodash'
 import useMounted from '../../hooks/useMounted';
-
 
 const useStyles = makeStyles((theme) => ({
     selector: {
@@ -33,8 +32,11 @@ const FiltersComponent = ({ collection, refetch }) => {
     const mounted = useMounted();
     const [filters, setFilters] = useState(initialFilters);
 
+    console.log({ mounted })
+
     useEffect(() => {
         if (!mounted) return;
+        console.log('update filter:', { filters });
         refetch(filters);
     }, [filters])
 
@@ -44,7 +46,9 @@ const FiltersComponent = ({ collection, refetch }) => {
         return prev;
     })
 
-    const onGenderChange = (item) => updateFilters({ key: 'gender', value: item.value || '' });
+    const onGenderChange = (item) => {
+        updateFilters({ key: 'gender', value: item.value || '' });
+    }
 
     const onTypeChange = (items, options) => {
         let list = [];
@@ -54,6 +58,8 @@ const FiltersComponent = ({ collection, refetch }) => {
             list = items ? items.map(i => i.value) : [];
         }
         updateFilters({ key: 'types', value: list });
+
+
     }
 
     const onColorChange = (items, options) => {
@@ -64,6 +70,7 @@ const FiltersComponent = ({ collection, refetch }) => {
             list = items ? items.map(i => i.value) : [];
         }
         updateFilters({ key: 'colors', value: list });
+
     }
 
     return (
@@ -96,15 +103,6 @@ const FiltersComponent = ({ collection, refetch }) => {
                     options={mapOptions(collection.colorsOptions)}
                     onChange={onColorChange}
                 />
-            }
-            {
-                // <Select
-                //     className={classes.selector}
-                //     isMulti
-                //     placeholder="Price Range"
-                //     options={mapOptions(collection.priceOptions)}
-                //     onChange={items => updateFilters({ key: 'priceRange', value: items.map(i => i.value) })}
-                // />
             }
         </div >
     )

@@ -6,8 +6,8 @@ import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
 import categories from "../../utils/data";
-import { capitalFirstLetter } from "../../services/dataTypes.service";
-import FooterComponent from "../../components/FooterComponent/FooterComponent";
+import { capitalFirstLetter } from "../../services/data-types";
+import FooterComponent from "../../components/FooterComponent";
 
 const useStyles = makeStyles((theme) => ({
   backgroundImage: {
@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
   },
   backgroundText: {
     boxShadow: "0px 0px 8px 8px rgba(0,0,0,0.2)",
-    backgroundColor: "rgb(0,0,0)" /* Fallback color */,
     backgroundColor: "rgba(0,0,0, 0.4)" /* Black w/opacity/see-through */,
     color: "white",
     fontSize: "60px",

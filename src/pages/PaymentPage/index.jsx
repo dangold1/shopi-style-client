@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import { useSelector } from 'react-redux';
-import { LoadingComponent } from '../../components/ExceptionComponents/ExceptionComponents';
+import { LoadingComponent } from '../../components/ExceptionComponents';
 import TextField from '@material-ui/core/TextField';
 import { cloneDeep } from 'lodash';
 import { STRIPE_PUBLISH_KEY, BASE_API_URL } from '../../utils/keys';

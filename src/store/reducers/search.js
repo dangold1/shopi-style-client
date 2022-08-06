@@ -2,7 +2,7 @@ import {
     FETCH_MATCH_PRODUCTS_REQUEST,
     FETCH_MATCH_PRODUCTS_SUCCESS,
     FETCH_MATCH_PRODUCTS_FAIL
-} from '../constats/autoCompleteConstants';
+} from '../constats/auto-complete';
 
 const initialState = { searchResults: [], isLoading: false, error: null };
 

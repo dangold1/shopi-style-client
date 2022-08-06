@@ -5,7 +5,7 @@ import {
     INCREASE_PRODUCT_AMOUNT,
     DECREASE_PRODUCT_AMOUNT,
     SELECT_PAGE,
-} from '../constats/shoppingListConstants';
+} from '../constats/shopping-list';
 
 import { cloneDeep } from 'lodash';
 

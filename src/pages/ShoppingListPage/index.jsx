@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {
   LoadingComponent,
   ErrorComponent,
-} from "../../components/ExceptionComponents/ExceptionComponents";
+} from "../../components/ExceptionComponents";
 import { useSelector, useDispatch } from "react-redux";
 import {
   decreaseProductAmountAction,
@@ -10,7 +10,7 @@ import {
   editProductSizeAction,
   increaseProductAmountAction,
   selectPaymentPageAction,
-} from "../../store/actions/shoppingListActions";
+} from "../../store/actions/shopping-list";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -29,7 +29,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { useHistory } from "react-router-dom";
-import { capitalized } from "../../services/dataTypes.service";
+import { capitalized } from "../../services/data-types";
 import "./ShoppingListPage.css";
 
 const useStyles = makeStyles((theme) => ({

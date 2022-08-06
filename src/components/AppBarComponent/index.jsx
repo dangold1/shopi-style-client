@@ -8,8 +8,8 @@ import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import AutoCompleteComponent from '../AutoCompleteComponent/AutoCompleteComponent';
-import { getProductsAmount } from '../../services/shoppingList.service';
+import AutoCompleteComponent from '../AutoCompleteComponent';
+import { getProductsAmount } from '../../services/shopping-list';
 
 // ---------------------------------- useStyles ----------------------------------
 

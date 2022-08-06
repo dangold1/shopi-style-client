@@ -3,7 +3,7 @@ import Autosuggest from 'react-autosuggest';
 import { BASE_API_URL } from '../../utils/keys';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { updateSelectedProductAction } from '../../store/actions/productsActions';
+import { updateSelectedProductAction } from '../../store/actions/products';
 import './AutoCompleteComponent.css';
 import { Link } from 'react-router-dom';
 

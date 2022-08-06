@@ -1,17 +1,17 @@
 import React from 'react';
 import { BrowserRouter as Router } from "react-router-dom";
-import AppBarComponent from './components/AppBarComponent/AppBarComponent';
-import CategoriesBarComponent from './components/CategoriesBarComponent/CategoriesBarComponent';
-import PagesRouts from './routes/PagesRouts';
+import AppBarComponent from './components/AppBarComponent';
+import CategoriesBarComponent from './components/CategoriesBarComponent';
+import PagesRoutes from './routes';
 import './App.css';
 
-const App = props => {
+const App = () => {
   return (
     <Router>
       <div className="App">
         <AppBarComponent />
         <CategoriesBarComponent />
-        <PagesRouts />
+        <PagesRoutes />
       </div>
     </Router>
   );

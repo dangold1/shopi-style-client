@@ -5,7 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 
 import './CategoriesBarComponent.css';
-import { capitalFirstLetter } from '../../services/dataTypes.service';
+import { capitalFirstLetter } from '../../services/data-types';
 import categories from '../../utils/data';
 
 

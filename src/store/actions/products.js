@@ -3,7 +3,7 @@ import {
     FETCH_PRODUCT_REQUEST,
     FETCH_PRODUCT_SUCCESS,
     FETCH_PRODUCT_FAIL, SET_SELECTED_PRODUCT,
-} from '../constats/productsConstants';
+} from '../constats/products';
 import axios from 'axios';
 
 export const updateSelectedProductAction = (newProduct) => (dispatch) => {
